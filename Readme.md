@@ -1,0 +1,39 @@
+# Minima List
+
+![task1](img/readme/MinimalistLogo.png)
+
+## Resumen
+
+Minima List es un proyecto *full stack* con el objetivo de hacer una lista de tareas.
+Hemos implementado la metodología *scrum* para la gestion del proyecto.
+Este documento permite ver todo el proceso de desarrollo, las historias de usuario, *sprints*, *backlog* y capturas de pantalla.
+
+## Desarrolladores
+
+- Alejandro Navarro
+- Jonathan Navarro
+- José Zaquinaula
+
+## Historias de Usuario
+
+Como usuario web no registrado:
+- Añadir tareas a la lista: quiero ver una lista de mis tareas.
+- Actualizar tareas: quiero modificar las tareas existentes y que se vean centradas.
+- Marcar / desmarcar tareas: quiero poder marcar y desmarcar las tareas como "hecho" y "por hacer" (por defecto) respectivamente.
+
+## Sprints
+
+### Sprint 1
+
+1. Para empezar pusimos a punto un repositorio de Git compartido.
+![task6](img/readme/gitlab.png)
+2. Hemos acordado en un almacenamiento de datos común para todo el equipo, como se ve a continuación.
+![task1](img/readme/proofhubFiles.png)
+3. Después, nos hemos informado sobre otras aplicaciones en internet para inspirarnos.
+4. Entonces, una vez pensado el nombre de nuestra empresa, diseñamos la primera versión del logo para el producto y su nombre.
+5. Hemos escrito el *readme* y la *[style guide](https://itecbcn.proofhub.com/go?rpEkAwb)*.
+6. Alojamos la página web en Gitlab.
+7. Rellenamos datos de prueba para probar la página web en funcionamiento.
+8. Finalmente, hemos publicado la [página web](https://josezaq.gitlab.io/m13-proyecto-to-do-list/).
+
+
