@@ -18,7 +18,7 @@ public class TodoItemService {
     }
 
     //consultar ítem per id
-    public TodoItem consultarItem(String id){
+    public TodoItem consultarItem(Long id){
         return todoItemRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class TodoItemService {
     //modificar sencer, si existeix el canvia, sino retorna null
     public TodoItem modificarItem(TodoItem it){
         TodoItem aux = null;
-        if(todoItemRepository.existsById(String.valueOf(it.getIdItem()))) {
+        if(todoItemRepository.existsById(it.getIdItem())) {
             aux = todoItemRepository.save(it);
         }
         return aux;
@@ -38,7 +38,7 @@ public class TodoItemService {
 
     //eliminar ítem per id
     //si no existeix id retorna null
-    public TodoItem eliminarItem(String id){
+    public TodoItem eliminarItem(Long id){
         TodoItem res=todoItemRepository.findById(id).orElse(null);
         if(res!=null) todoItemRepository.deleteById(id);
         return res;

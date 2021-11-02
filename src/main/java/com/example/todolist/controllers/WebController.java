@@ -23,7 +23,7 @@ public class WebController {
     }
 
     @GetMapping("/tasques/{id}")
-    public TodoItem consultarUsuari(@PathVariable String id)
+    public TodoItem consultarUsuari(@PathVariable Long id)
     {
         return todoItemService.consultarItem(id);
     }
@@ -34,7 +34,7 @@ public class WebController {
     }
 
     @DeleteMapping("/tasques/{id}")
-    public TodoItem eliminarUsuari(@PathVariable String id){
+    public TodoItem eliminarUsuari(@PathVariable Long id){
         return todoItemService.eliminarItem(id);
     }
 
