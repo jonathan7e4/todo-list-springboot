@@ -37,3 +37,11 @@ Como usuario web no registrado:
 8. Finalmente, hemos publicado la [página web](https://josezaq.gitlab.io/m13-proyecto-to-do-list/).
 
 
+### Sprint 2
+
+1. Primero creamos un proyecto nuevo de GitLab para instalar Spring Boot.
+2. Entonces instalamos Spring Boot en nuestro proyecto con las dependencias: Lombok, Spring Web, Thymeleaf, Spring Data JPA y H2.
+3. Una vez preparado el proyecto, hemos configurado los controladores y modelos.
+4. Nos hemos registrado en Postman y clonado el repositorio en GitHub.
+5. También nos hemos registrado en Heroku y sincronizado el repositorio de GitHub con uno nuevo creado previamente en Heroku, activando el control de versiones automático en la branca "main".
+![task1](img/readme/syncDeployment.png)
