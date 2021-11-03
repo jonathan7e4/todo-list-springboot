@@ -13,6 +13,7 @@ public class TodoItem {
     @GeneratedValue
     private long idItem;
     private String descripcio;
-    private boolean fet;
+    private boolean fet = false;
+    @GeneratedValue
     private long prioritat;
 }
