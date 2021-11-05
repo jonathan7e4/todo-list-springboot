@@ -45,3 +45,8 @@ Como usuario web no registrado:
 4. Nos hemos registrado en Postman y clonado el repositorio en GitHub.
 5. También nos hemos registrado en Heroku y sincronizado el repositorio de GitHub con uno nuevo creado previamente en Heroku, activando el control de versiones automático en la branca "main".
 ![task1](img/readme/syncDeployment.png)
+6. Programamos los controladores para crear, actualizar y borrar elementos de la lista.
+7. Y finalmente, utilizando el objeto *ResponseEntity*, programamos que los métodos devuelvan *HttpStatus* para comunicar al cliente si ha habido algun error en la petición:
+    - Error *404 not found* si el objeto de la petición no existe.
+    - Error *204 no content* si el objeto de la petición no tiene contenido.
+    - Estado *200 OK* si el objeto de la petición devuelve el JSON correctamente.
