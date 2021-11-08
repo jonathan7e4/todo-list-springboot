@@ -50,3 +50,26 @@ Como usuario web no registrado:
     - Error *404 not found* si el objeto de la petición no existe.
     - Error *204 no content* si el objeto de la petición no tiene contenido.
     - Estado *200 OK* si el objeto de la petición devuelve el JSON correctamente.
+
+### Sprint 2 - End points
+
+- GET "/todoitems" muestra todos los elementos actuales.
+- GET "/todoitems/{id}" muestra el elemento el cual su ID es el indicado en el *endpoint*.
+- POST "/todoitems" inserta un elemento nuevo, como mínimo necesita el atributo "descripcio":
+```
+{
+  "descripcio": "value",
+  "fet": false,
+  "prioritat": 10
+}
+```
+- PUT "/todoitems" modifica un elemento existente, necesita el atributo "idItem", enviando un JSON con el formato que se muestra a continuación:
+```
+{
+  "idItem": 1,
+  "descripcio": "some data here",
+  "fet": true,
+  "prioritat": 123
+}
+```
+- DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
