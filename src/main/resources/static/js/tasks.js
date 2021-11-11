@@ -26,7 +26,7 @@ input.addEventListener("keyup", function(event) {
 })
 
 // Check / Uncheck list
-var list = document.querySelector('ul');
+var list = document.querySelector('#task_list');
 list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
         ev.target.classList.toggle('checked');

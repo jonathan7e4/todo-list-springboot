@@ -20,9 +20,27 @@
         <h1 class="title">M I N I M A - L I S T</h1>
     </header>
     <!-- Page body -->
-    <main>
+    <main class="container">
         <div class="wrapper">
-            <header>Todo List</header>
+            <header>Lists</header>
+            <!-- Add task -->
+            <div class="list-insert">
+                <input type="text" id="list" placeholder="Afegeix una llista..." maxlength="45">
+                <button id="addListBtn" onclick="addList()"><i class="fas fa-plus"></i></button>
+            </div>
+            <!-- Task list -->
+            <ul id="list_list">
+                <!-- All tasks on <li> from task.js using addTask() -->
+            </ul>
+            <!--
+            <div class="footer">
+                <span>Tens 4 tasques pendents</span>
+                <button>Esborra tot</button>
+            </div>
+            -->
+        </div>
+        <div class="wrapper">
+            <header>Tasks</header>
             <!-- Add task -->
             <div class="task-insert">
                 <input type="text" id="task" placeholder="Afegeix una tasca..." maxlength="45">
@@ -41,6 +59,7 @@
         </div>
     </main>
     <script type="text/javascript" th:src="@{/js/tasks.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lists.js}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </body>

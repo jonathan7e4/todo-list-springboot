@@ -8,6 +8,11 @@ body {
     background: linear-gradient(to bottom, #f8bbd0 10%, #ffffff 100%);
 }
 
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
 .title {
     background-color: #f8bbd0;
     text-align: center;
