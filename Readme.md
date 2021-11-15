@@ -73,3 +73,19 @@ Como usuario web no registrado:
 }
 ```
 - DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
+## Modelo de Datos 
+```mermaid
+classDiagram
+class TodoItem{
+    +long idItem
+    +String descripcio
+    +boolean fet = false
+    +long prioritat
+}
+class ItemList{
+    +int listId
+    +String name
+    +List<TodoItem> itemList
+}
+ItemList "1..*" -- "*..1" TodoItem  
+```
