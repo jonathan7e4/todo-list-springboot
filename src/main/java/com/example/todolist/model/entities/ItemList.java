@@ -12,7 +12,6 @@ public class ItemList {
     @GeneratedValue
     private int listId;
     private String name;
-    @OneToMany
-    @JoinColumn
-    private List<TodoItem> itemList;
+    @OneToMany(mappedBy = "list")
+    private List<TodoItem> items;
 }

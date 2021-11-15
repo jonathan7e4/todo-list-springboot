@@ -74,6 +74,7 @@ Como usuario web no registrado:
 ```
 - DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
 ## Modelo de Datos 
+Si no se muestra el modelo de datos, en intelliij ir a settings-lagnaguaje&...-markdown y checkar mermaid
 ```mermaid
 classDiagram
 class TodoItem{
@@ -81,11 +82,11 @@ class TodoItem{
     +String descripcio
     +boolean fet = false
     +long prioritat
+    +ItemList list
 }
 class ItemList{
     +int listId
     +String name
-    +List<TodoItem> itemList
 }
-ItemList "1..*" -- "*..1" TodoItem  
+ItemList "0..1" -- "1..*" TodoItem  
 ```

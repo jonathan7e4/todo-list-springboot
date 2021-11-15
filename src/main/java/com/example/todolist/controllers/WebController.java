@@ -1,6 +1,8 @@
 package com.example.todolist.controllers;
 
+import com.example.todolist.model.entities.ItemList;
 import com.example.todolist.model.entities.TodoItem;
+import com.example.todolist.model.services.ItemListService;
 import com.example.todolist.model.services.TodoItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebController {
     private final TodoItemService todoItemService;
+    private final ItemListService itemListService;
 
     //TODO
     //Amb l'exemple de l'altre controlador cal canviar el retorn d'aquests endpoints
     //pel seu corresponent retornant un ResponseEntity
 
+    //LIST-ENDPOINTS
+    @PostMapping("/todolists")
+    public ResponseEntity<?> crearList(@RequestBody ItemList list){
+        ItemList _list = itemListService.afegirLlista(list);
+        return new ResponseEntity<ItemList>(_list,HttpStatus.CREATED);
+    }
 
+    //ITEMS-ENDPOINTS
     @GetMapping("/todoitems")
     public ResponseEntity<?> llistarItems(){
         List<TodoItem> itemList = todoItemService.llistarItems();
