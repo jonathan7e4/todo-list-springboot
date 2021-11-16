@@ -15,6 +15,7 @@ public class TodoItem {
     private boolean fet = false;
     @GeneratedValue
     private long prioritat;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "list_id")
     private ItemList list;
 }
