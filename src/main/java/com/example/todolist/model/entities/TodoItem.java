@@ -19,6 +19,5 @@ public class TodoItem {
     private long prioritat;
     @ManyToOne
     @JoinColumn(name = "list_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Permita escribir la variable pero no leerla en el request.evita crear un bucle infinito en el request.
     private ItemList list;
 }
