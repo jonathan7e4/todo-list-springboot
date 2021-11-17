@@ -27,6 +27,15 @@ public class WebController {
         ItemList _list = itemListService.afegirLlista(list);
         return new ResponseEntity<ItemList>(_list,HttpStatus.CREATED);
     }
+    @GetMapping("/todolists")
+    public ResponseEntity<?> llistarLlistes(){
+        List<ItemList> list = itemListService.llistarLlistes();
+        if(list.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(list);
+        }
+    }
 
     //ITEMS-ENDPOINTS
     @GetMapping("/todoitems")

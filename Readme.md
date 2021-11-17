@@ -73,6 +73,10 @@ Como usuario web no registrado:
 }
 ```
 - DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
+###  Sprint 3 - 
+- Crear Lista:
+![como crear un item relacionado con una lista](src/main/resources/static/img/agregar_un_item_relationship.png)
+- 
 ## Modelo de Datos 
 Si no se muestra el modelo de datos, en intelliij ir a settings-lagnaguaje&...-markdown y checkar mermaid
 ```mermaid

@@ -12,6 +12,6 @@ public class ItemList {
     @GeneratedValue
     private int listId;
     private String name;
-    @OneToMany(mappedBy = "list")
+    @OneToMany(mappedBy = "list") // mapea toda item que contenga la variable list
     private List<TodoItem> items;
 }

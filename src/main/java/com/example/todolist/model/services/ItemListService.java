@@ -5,13 +5,19 @@ import com.example.todolist.model.repositories.ItemListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ItemListService {
-    private final ItemListRepository todoItemRepository;
+    private final ItemListRepository itemListRepository;
 
     // afegir una llista
     public ItemList afegirLlista(ItemList list){
-        return todoItemRepository.save(list);
+        return itemListRepository.save(list);
+    }
+    // llistar totes les llistes
+    public List<ItemList> llistarLlistes(){
+        return itemListRepository.findAll();
     }
 }
