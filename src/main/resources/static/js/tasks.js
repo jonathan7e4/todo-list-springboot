@@ -2,6 +2,41 @@
 const inputBox = document.querySelector(".task-insert input");
 const addBtn = document.querySelector(".task-insert button");
 
+const url = "http://localhost:8080/todoitems";
+
+
+function newElement( element )
+{
+    return document.createElement( element );
+}
+
+
+function parentOf( parent, newChild )
+{
+    return parent.appendChild( newChild );
+}
+
+
+fetch( url,
+    {
+        method: 'GET',
+        headers: new Headers({'Content-type': 'application/json'})
+    } ).then( ( response ) => response.json() ).then( function( data )
+{
+    data.map(function (task){
+        console.log(task)
+        const lu = document.getElementById("task_list")
+        const li = newElement('li')
+        li.innerText = `${task.idItem}`
+        parentOf(lu,li)
+    })
+
+} ).catch( function( error )
+{
+    console.log( error );
+} );
+
+
 inputBox.onkeyup = ()=> {
     let userData = inputBox.value;
     if (userData.trim() != 0) {
