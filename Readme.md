@@ -1,6 +1,6 @@
 # Minima List
 
-![task1](img/readme/minimalistLogo.png)
+![task1](img/minimalistLogo.png)
 
 ## Resumen
 
@@ -26,9 +26,9 @@ Como usuario web no registrado:
 ### Sprint 1
 
 1. Para empezar pusimos a punto un repositorio de Git compartido.
-![task6](img/readme/gitlab.png)
+![task6](img/gitlab.png)
 2. Hemos acordado en un almacenamiento de datos común para todo el equipo, como se ve a continuación.
-![task1](img/readme/proofhubFiles.png)
+![task1](img/proofhubFiles.png)
 3. Después, nos hemos informado sobre otras aplicaciones en internet para inspirarnos.
 4. Entonces, una vez pensado el nombre de nuestra empresa, diseñamos la primera versión del logo para el producto y su nombre.
 5. Hemos escrito el *readme* y la *[style guide](https://itecbcn.proofhub.com/go?rpEkAwb)*.
@@ -44,7 +44,7 @@ Como usuario web no registrado:
 3. Una vez preparado el proyecto, hemos configurado los controladores y modelos.
 4. Nos hemos registrado en Postman y clonado el repositorio en GitHub.
 5. También nos hemos registrado en Heroku y sincronizado el repositorio de GitHub con uno nuevo creado previamente en Heroku, activando el control de versiones automático en la branca "main".
-![task1](img/readme/syncDeployment.png)
+![task1](img/syncDeployment.png)
 6. Programamos los controladores para crear, actualizar y borrar elementos de la lista.
 7. Y finalmente, utilizando el objeto *ResponseEntity*, programamos que los métodos devuelvan *HttpStatus* para comunicar al cliente si ha habido algun error en la petición:
     - Error *404 not found* si el objeto de la petición no existe.
@@ -56,6 +56,7 @@ Como usuario web no registrado:
 - GET "/todoitems" muestra todos los elementos actuales.
 - GET "/todoitems/{id}" muestra el elemento el cual su ID es el indicado en el *endpoint*.
 - POST "/todoitems" inserta un elemento nuevo, como mínimo necesita el atributo "descripcio":
+
 ```
 {
   "descripcio": "value",
@@ -63,7 +64,9 @@ Como usuario web no registrado:
   "prioritat": 10
 }
 ```
+
 - PUT "/todoitems" modifica un elemento existente, necesita el atributo "idItem", enviando un JSON con el formato que se muestra a continuación:
+
 ```
 {
   "idItem": 1,
@@ -72,13 +75,18 @@ Como usuario web no registrado:
   "prioritat": 123
 }
 ```
+
 - DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
-###  Sprint 3 - 
+
+###  Sprint 3
+
 - Crear Lista:
-![como crear un item relacionado con una lista](src/main/resources/static/img/agregar_un_item_relationship.png)
-- 
-## Modelo de Datos 
-Si no se muestra el modelo de datos, en intelliij ir a settings-lagnaguaje&...-markdown y checkar mermaid
+![como crear un item relacionado con una lista](img/agregarUnItemRelationship.png)
+
+## Modelo de Datos
+
+Si no se muestra el modelo de datos, (en IntelliJ IDE) ir a settings > language > markdown y activar mermaid.
+
 ```mermaid
 classDiagram
 class TodoItem{
