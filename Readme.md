@@ -1,6 +1,6 @@
 # Minima List
 
-![task1](img/readme/MinimalistLogo.png)
+![task1](img/readme/minimalistLogo.png)
 
 ## Resumen
 
