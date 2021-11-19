@@ -23,12 +23,10 @@ public class WebController {
 
     //LIST-ENDPOINTS
     @PostMapping("/todolists")
-    public ResponseEntity<?> crearLlista(@RequestBody ItemList list){ // HU1
+    public ResponseEntity<?> crearLlista(@RequestBody ItemList list){
         ItemList _list = itemListService.afegirLlista(list);
         return new ResponseEntity<ItemList>(_list,HttpStatus.CREATED);
     }
-
-    // HU2
     @DeleteMapping("/todolists/{id}")
     public ResponseEntity<?> eliminarLlista(@PathVariable Integer id){
         ItemList task = itemListService.consultarLlista(id);
@@ -41,7 +39,7 @@ public class WebController {
     }
 
     @PutMapping("/todolists")
-    public ResponseEntity<?> modificarLlista(@RequestBody ItemList list){ // HU3
+    public ResponseEntity<?> modificarLlista(@RequestBody ItemList list){
         if(list == null){
             return ResponseEntity.notFound().build();
         }else{
@@ -49,7 +47,7 @@ public class WebController {
         }
     }
     @GetMapping("/todolists")
-    public ResponseEntity<?> llistarLlistes(){ // HU4
+    public ResponseEntity<?> llistarLlistes(){
         List<ItemList> list = itemListService.llistarLlistes();
         if(list.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -62,6 +60,16 @@ public class WebController {
     public ResponseEntity<?> consultarLlista(@PathVariable Integer id)
     {
         ItemList list = itemListService.consultarLlista(id);
+        if (list == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(list);
+        }
+    }
+
+    @GetMapping("/todolists/{id}/todoitems")
+    public ResponseEntity<?> consultarItemsLlista(@PathVariable Integer id){
+        List<TodoItem> list = itemListService.consultarItemsLlista(id);
         if (list == null) {
             return ResponseEntity.notFound().build();
         } else {

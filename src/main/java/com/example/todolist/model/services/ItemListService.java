@@ -3,9 +3,11 @@ package com.example.todolist.model.services;
 import com.example.todolist.model.entities.ItemList;
 import com.example.todolist.model.entities.TodoItem;
 import com.example.todolist.model.repositories.ItemListRepository;
+import com.example.todolist.model.repositories.TodoItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,8 +40,19 @@ public class ItemListService {
         if(res!=null) itemListRepository.deleteById(id);
         return res;
     }
-
+    // consultar llista
     public ItemList consultarLlista(Integer id){
         return itemListRepository.findById(id).orElse(null);
+    }
+
+    // consultar items llista
+    public List<TodoItem> consultarItemsLlista(Integer id){
+        List<TodoItem> itemList = new ArrayList<>();
+        ItemList il = itemListRepository.findById(id).orElse(null);
+        assert il != null;
+        List<TodoItem> aux = il.getItems();
+        // filtrar por listID
+        aux.stream().filter(x -> x.getList().getListId() == id).forEach(itemList::add);
+        return itemList;
     }
 }
