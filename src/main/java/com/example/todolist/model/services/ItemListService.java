@@ -44,16 +44,16 @@ public class ItemListService {
      * @param todoItem The new task to be created.
      * @param listId The id of the list to add the new task to.
      */
-    public TodoItem createTask( TodoItem todoItem, Integer listId )
+    public ItemList createTask( TodoItem todoItem, Integer listId )
     {
         ItemList itemList = itemListRepository.findById( listId ).orElse( null );
         todoItem.setList( itemList );
         if ( itemList != null )
         {
             itemList.getItems().add( todoItem );
-            itemListRepository.save( itemList );
+            return itemListRepository.save( itemList );
         }
-        return todoItem;
+        return null;
     }
 
 

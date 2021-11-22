@@ -33,8 +33,8 @@ public class WebController {
     @PostMapping("todolists/{id}/todoitems")
     public ResponseEntity<?> createListItem( @RequestBody TodoItem todoItem, @PathVariable int id )
     {
-        TodoItem newItem = itemListService.createTask( todoItem, id );
-        return new ResponseEntity<>( newItem, HttpStatus.CREATED );
+        ItemList itemList = itemListService.createTask( todoItem, id );
+        return new ResponseEntity<>( itemList, HttpStatus.CREATED );
     }
 
 
