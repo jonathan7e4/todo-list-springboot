@@ -3,6 +3,7 @@ package com.example.todolist.model.services;
 import com.example.todolist.model.entities.ItemList;
 import com.example.todolist.model.entities.TodoItem;
 import com.example.todolist.model.repositories.ItemListRepository;
+import com.example.todolist.model.repositories.TodoItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemListService {
     private final ItemListRepository itemListRepository;
+    private final TodoItemRepository todoItemRepository;
 
     // afegir una llista
     public ItemList afegirLlista(ItemList list){
@@ -44,16 +46,12 @@ public class ItemListService {
      * @param todoItem The new task to be created.
      * @param listId The id of the list to add the new task to.
      */
-    public ItemList createTask( TodoItem todoItem, Integer listId )
+    public TodoItem createTask( TodoItem todoItem, Integer listId )
     {
         ItemList itemList = itemListRepository.findById( listId ).orElse( null );
+        if ( itemList != null ) itemList.getItems().add( todoItem );
         todoItem.setList( itemList );
-        if ( itemList != null )
-        {
-            itemList.getItems().add( todoItem );
-            return itemListRepository.save( itemList );
-        }
-        return null;
+        return todoItemRepository.save( todoItem );
     }
 
 
