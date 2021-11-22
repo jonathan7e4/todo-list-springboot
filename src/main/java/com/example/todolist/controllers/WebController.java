@@ -4,6 +4,7 @@ import com.example.todolist.model.entities.ItemList;
 import com.example.todolist.model.entities.TodoItem;
 import com.example.todolist.model.services.ItemListService;
 import com.example.todolist.model.services.TodoItemService;
+//import com.sun.tools.javac.comp.Todo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,23 +40,36 @@ public class WebController {
 
 
     @PutMapping("/todolists/{listId}/todoitems/{taskId}")
-    public ResponseEntity<?> updateListItem( @RequestBody TodoItem todoItem, @PathVariable Integer listId, @PathVariable Long taskId )
+    public ResponseEntity<?> updateListItem( @RequestBody TodoItem todoItem, @PathVariable Integer listId, @PathVariable int taskId ) // HU8
     {
         if ( todoItem == null ) return ResponseEntity.notFound().build();
         else
         {
-            ItemList itemList = itemListService.consultarLlista( listId );
-            todoItem.setIdItem( taskId );
-            if ( itemList != null )
-            {
-                itemList.getItems().add( todoItem );
-                todoItem.setList( itemList );
+            ItemList itemList = itemListService.consultarLlista( listId ); // get list by id
+            TodoItem item = itemList.getItems().get(taskId - 1 );  // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
+            todoItem.setIdItem(item.getIdItem()); // set id to new_item
+            todoItem.setList(itemList); // set list to new_item
+            if ( itemList != null ){
+                todoItemService.modificarItem(todoItem); // modify item_DDBB to new_item
+                return ResponseEntity.ok(todoItem);
             }
-            //return ResponseEntity.ok( itemListService.updateTask( todoItem, listId, taskId ) );
         }
-        return ResponseEntity.ok( todoItem );
+        return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/todolists/{listId}/todoitems/{taskId}") // HU9
+    public ResponseEntity<?> eliminarLlistaItem(@PathVariable Integer listId, @PathVariable Integer taskId){
+        ItemList list = itemListService.consultarLlista(listId); // get list by id
+        TodoItem item = list.getItems().get(taskId-1); // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
+        if (item == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            todoItemService.eliminarItem(item.getIdItem()); // erase item by id
+            list.getItems().remove(taskId-1); // erase item from list
+            itemListService.modificarLlista(list); // save modified list
+            return ResponseEntity.noContent().build();
+        }
+    }
 
     @DeleteMapping("/todolists/{id}")
     public ResponseEntity<?> eliminarLlista(@PathVariable Integer id){
@@ -109,15 +123,17 @@ public class WebController {
 
 
     @GetMapping("/todolists/{listId}/todoitems/{taskId}")
-    public ResponseEntity<?> getListItem( @PathVariable Integer listId, @PathVariable Long taskId )
+    public ResponseEntity<?> getListItem( @PathVariable Integer listId, @PathVariable int taskId )
     {
         List<TodoItem> todoItems = itemListService.consultarItemsLlista(listId);
-        TodoItem task = null;
+        TodoItem item = null;
+//        for ( TodoItem todoItem : todoItems ) if ( todoItem.getIdItem() == taskId ) task = todoItem;
+        if(todoItems != null){
+            item = todoItems.get(taskId - 1 ); // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
+        }
 
-        for ( TodoItem todoItem : todoItems ) if ( todoItem.getIdItem() == taskId ) task = todoItem;
-
-        if ( task == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok( task );
+        if ( item == null ) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok( item );
     }
 
 
