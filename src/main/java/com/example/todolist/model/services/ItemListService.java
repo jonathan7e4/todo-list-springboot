@@ -68,7 +68,8 @@ public class ItemListService {
             todoItemRepository.deleteById( taskId );
         }
         todoItem.setList( itemList );
-        return todoItemRepository.save( todoItem );
+//        return todoItemRepository.save( todoItem );
+        return todoItem;
     }
 
 
