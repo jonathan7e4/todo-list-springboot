@@ -62,8 +62,8 @@ public class ItemListService {
     {
         ItemList itemList = itemListRepository.findById( listId ).orElse( null );
         todoItem.setIdItem( taskId );
-//        if ( itemList != null ) itemList.getItems().add( todoItem );
-//        todoItem.setList( itemList );
+        if ( itemList != null ) itemList.getItems().add( todoItem );
+        todoItem.setList( itemList );
 //        return todoItemRepository.save( todoItem );
         return todoItem;
     }
