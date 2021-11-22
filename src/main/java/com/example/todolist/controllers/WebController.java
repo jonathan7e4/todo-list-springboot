@@ -53,7 +53,7 @@ public class WebController {
             }
             //return ResponseEntity.ok( itemListService.updateTask( todoItem, listId, taskId ) );
         }
-        return ResponseEntity.ok( itemListService.afegirLlista( itemList ) );
+        return ResponseEntity.ok( todoItemService.afegirItem( todoItem ) );
     }
 
 
