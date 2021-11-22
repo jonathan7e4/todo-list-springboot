@@ -41,10 +41,19 @@ public class WebController {
     @PutMapping("/todolists/{listId}/todoitems/{taskId}")
     public ResponseEntity<?> updateListItem( @RequestBody TodoItem todoItem, @PathVariable Integer listId, @PathVariable Long taskId )
     {
-        ItemList itemList = itemListService.consultarLlista( listId );
         if ( todoItem == null ) return ResponseEntity.notFound().build();
         else
         {
+            List<TodoItem> oldListTasks = itemListService.consultarItemsLlista( listId );
+
+            ItemList itemList = itemListService.consultarLlista( listId );
+
+            this.eliminarLlista( listId );
+
+            itemListService.afegirLlista( itemList );
+
+            for ( TodoItem oldTask : oldListTasks ) if ( oldTask.getIdItem() != taskId ) todoItemService.afegirItem( oldTask );
+
             todoItem.setIdItem( taskId );
             if ( itemList != null )
             {
