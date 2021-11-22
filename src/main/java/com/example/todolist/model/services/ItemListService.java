@@ -47,6 +47,7 @@ public class ItemListService {
     public void createTask( TodoItem todoItem, Integer listId )
     {
         ItemList itemList = itemListRepository.findById( listId ).orElse( null );
+        todoItem.setList( itemList );
         if ( itemList != null )
         {
             itemList.getItems().add( todoItem );
