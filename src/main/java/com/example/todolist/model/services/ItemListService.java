@@ -53,6 +53,19 @@ public class ItemListService {
         todoItem.setList( itemList );
         return todoItemRepository.save( todoItem );
     }
+    /**
+     * Updates a task from a list with a given parameter id.
+     * @param todoItem The task to be updated.
+     * @param listId The id of the list to update the task to.
+     */
+    public TodoItem updateTask( TodoItem todoItem, Integer listId, Long taskId )
+    {
+        ItemList itemList = itemListRepository.findById( listId ).orElse( null );
+        todoItem.setIdItem( taskId );
+        if ( itemList != null ) itemList.getItems().add( todoItem );
+        todoItem.setList( itemList );
+        return todoItemRepository.save( todoItem );
+    }
 
 
     // consultar llista

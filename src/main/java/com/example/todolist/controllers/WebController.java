@@ -38,6 +38,14 @@ public class WebController {
     }
 
 
+    @PutMapping("/todolists/{listId}/todoitems/{taskId}")
+    public ResponseEntity<?> updateListItem( @RequestBody TodoItem todoItem,  @PathVariable Integer listId, @PathVariable Long taskId  )
+    {
+        if ( todoItem == null ) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok( itemListService.updateTask( todoItem, listId, taskId ) );
+    }
+
+
     @DeleteMapping("/todolists/{id}")
     public ResponseEntity<?> eliminarLlista(@PathVariable Integer id){
         ItemList task = itemListService.consultarLlista(id);
