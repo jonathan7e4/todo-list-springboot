@@ -8,8 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -25,8 +26,18 @@ public class WebController {
     @PostMapping("/todolists")
     public ResponseEntity<?> crearLlista(@RequestBody ItemList list){
         ItemList _list = itemListService.afegirLlista(list);
-        return new ResponseEntity<ItemList>(_list,HttpStatus.CREATED);
+        return new ResponseEntity<>(_list,HttpStatus.CREATED);
     }
+
+
+    @PostMapping("todolists/{id}/todoitems")
+    public ResponseEntity<?> createListItem( @RequestBody TodoItem todoItem, @PathVariable int id )
+    {
+        itemListService.createTask( todoItem, id );
+        return new ResponseEntity<>( todoItem, HttpStatus.CREATED );
+    }
+
+
     @DeleteMapping("/todolists/{id}")
     public ResponseEntity<?> eliminarLlista(@PathVariable Integer id){
         ItemList task = itemListService.consultarLlista(id);
@@ -115,8 +126,8 @@ public class WebController {
 
     @PostMapping("/todoitems")
     public ResponseEntity<?> crearItem(@RequestBody TodoItem nou){
-        TodoItem task =  todoItemService.afegirItem(nou);
-        return new ResponseEntity<TodoItem>(task, HttpStatus.CREATED);
+        TodoItem task = todoItemService.afegirItem(nou);
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/todoitems/{id}")
@@ -140,5 +151,4 @@ public class WebController {
             return ResponseEntity.ok(mod);
         }
     }
-
 }

@@ -3,12 +3,11 @@ package com.example.todolist.model.services;
 import com.example.todolist.model.entities.ItemList;
 import com.example.todolist.model.entities.TodoItem;
 import com.example.todolist.model.repositories.ItemListRepository;
-import com.example.todolist.model.repositories.TodoItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +39,22 @@ public class ItemListService {
         if(res!=null) itemListRepository.deleteById(id);
         return res;
     }
+    /**
+     * Creates a new task in a list from a given parameter id.
+     * @param todoItem The new task to be created.
+     * @param listId The id of the list to add the new task to.
+     */
+    public void createTask( TodoItem todoItem, Integer listId )
+    {
+        ItemList itemList = itemListRepository.findById( listId ).orElse( null );
+        if ( itemList != null )
+        {
+            itemList.getItems().add( todoItem );
+            itemListRepository.save( itemList );
+        }
+    }
+
+
     // consultar llista
     public ItemList consultarLlista(Integer id){
         return itemListRepository.findById(id).orElse(null);
