@@ -65,7 +65,7 @@ public class ItemListService {
         if ( itemList != null )
         {
             itemList.getItems().add( todoItem );
-            todoItemRepository.deleteById( taskId );
+//            todoItemRepository.deleteById( taskId );
         }
         todoItem.setList( itemList );
 //        return todoItemRepository.save( todoItem );
