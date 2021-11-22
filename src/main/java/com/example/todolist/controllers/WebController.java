@@ -81,9 +81,13 @@ public class WebController {
     @GetMapping("/todolists/{listId}/todoitems/{taskId}")
     public ResponseEntity<?> getListItem( @PathVariable Integer listId, @PathVariable Long taskId )
     {
-        TodoItem todoItem = itemListService.consultarItemsLlista( listId ).get( Math.toIntExact( taskId ) );
-        if ( todoItem == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok( todoItem );
+        List<TodoItem> todoItems = itemListService.consultarItemsLlista(listId);
+        TodoItem task = null;
+
+        for ( TodoItem todoItem : todoItems ) if ( todoItem.getIdItem() == taskId ) task = todoItem;
+
+        if ( task == null ) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok( task );
     }
 
 
