@@ -41,8 +41,9 @@ public class WebController {
     @PutMapping("/todolists/{listId}/todoitems/{taskId}")
     public ResponseEntity<?> updateListItem( @RequestBody TodoItem todoItem,  @PathVariable Integer listId, @PathVariable Long taskId  )
     {
-        if ( todoItem == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok( itemListService.updateTask( todoItem, listId, taskId ) );
+//        if ( todoItem == null ) return ResponseEntity.notFound().build();
+//        else return ResponseEntity.ok( itemListService.updateTask( todoItem, listId, taskId ) );
+        return ResponseEntity.ok( todoItem );
     }
 
 
