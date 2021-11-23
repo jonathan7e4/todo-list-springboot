@@ -45,21 +45,16 @@ public class WebController {
         if ( todoItem == null ) return ResponseEntity.notFound().build();
         else
         {
-            ItemList itemList = itemListService.consultarLlista( listId ); // get list by id
+            ItemList itemList = itemListService.consultarLlista( listId );
 
-            //TodoItem item = null;
-            //TodoItem item = itemList.getItems().get( taskId - 1 );  // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
             for ( int i = 0 ; i < itemList.getItems().size() ; i ++ ) if ( itemList.getItems().get( i ).getIdItem() == taskId ) itemList.getItems().remove( i );
 
-            todoItem.setIdItem( taskId ); // set id to new_item
-            todoItem.setList( itemList ); // set list to new_item
-            if ( itemList != null )
-            {
-                todoItemService.modificarItem( todoItem ); // modify item_DDBB to new_item
-                return ResponseEntity.ok( todoItem );
-            }
+            todoItem.setIdItem( taskId );
+            todoItem.setList( itemList );
+
+            todoItemService.modificarItem( todoItem );
+            return ResponseEntity.ok( todoItem );
         }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/todolists/{listId}/todoitems/{taskId}") // HU9
