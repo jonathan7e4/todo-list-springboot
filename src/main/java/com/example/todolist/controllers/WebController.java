@@ -131,17 +131,17 @@ public class WebController {
 
 
     @GetMapping("/todolists/{listId}/todoitems/{taskId}")
-    public ResponseEntity<?> getListItem( @PathVariable Integer listId, @PathVariable int taskId )
+    public ResponseEntity<?> getListItem( @PathVariable Integer listId, @PathVariable Long taskId )
     {
         List<TodoItem> todoItems = itemListService.consultarItemsLlista(listId);
-        TodoItem item = null;
-//        for ( TodoItem todoItem : todoItems ) if ( todoItem.getIdItem() == taskId ) task = todoItem;
-        if(todoItems != null){
-            item = todoItems.get(taskId - 1 ); // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
-        }
+        TodoItem task = null;
 
-        if ( item == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok( item );
+        for ( TodoItem todoItem : todoItems ) if ( todoItem.getIdItem() == taskId ) task = todoItem;
+//        if(todoItems != null){
+//            item = todoItems.get(taskId - 1 ); // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
+//        }
+        if ( task == null ) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok( task );
     }
 
 
