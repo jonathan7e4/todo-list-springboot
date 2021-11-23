@@ -47,16 +47,16 @@ public class WebController {
         {
             ItemList itemList = itemListService.consultarLlista( listId ); // get list by id
 
-            TodoItem item = null;
+            //TodoItem item = null;
             //TodoItem item = itemList.getItems().get( taskId - 1 );  // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
-            for ( int i = 0 ; i < itemList.getItems().size() ; i ++ ) if ( itemList.getItems().get( i ).getIdItem() == taskId ) item = itemList.getItems().get( i );
+            for ( int i = 0 ; i < itemList.getItems().size() ; i ++ ) if ( itemList.getItems().get( i ).getIdItem() == taskId ) itemList.getItems().remove( i );
 
-            //todoItem.setIdItem( item.getIdItem() ); // set id to new_item
-            //todoItem.setList( itemList ); // set list to new_item
+            todoItem.setIdItem( taskId ); // set id to new_item
+            todoItem.setList( itemList ); // set list to new_item
             if ( itemList != null )
             {
-                todoItemService.modificarItem( item ); // modify item_DDBB to new_item
-                return ResponseEntity.ok( item );
+                todoItemService.modificarItem( todoItem ); // modify item_DDBB to new_item
+                return ResponseEntity.ok( todoItem );
             }
         }
         return ResponseEntity.notFound().build();
