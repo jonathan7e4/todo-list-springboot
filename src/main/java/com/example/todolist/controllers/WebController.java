@@ -58,23 +58,17 @@ public class WebController {
     }
 
     @DeleteMapping("/todolists/{listId}/todoitems/{taskId}") // HU9
-    public ResponseEntity<?> removeListItem( @PathVariable Integer listId, @PathVariable Long taskId )
-    {
+    public ResponseEntity<?> removeListItem( @PathVariable Integer listId, @PathVariable Long taskId ) {
         ItemList itemList = itemListService.consultarLlista( listId ); // get list by id
-
         //TodoItem todoItem = list.getItems().get(taskId-1); // WARNING: LA ID  NO ES DEL ITEM, ES DE  LA POSICION DEL ITEM EN LA LISTA
-
         TodoItem todoItem = itemList.getItems().stream().filter( item -> item.getIdItem() == taskId ).findFirst().orElse( null );
-
         if ( todoItem == null ) return ResponseEntity.notFound().build();
         else {
             todoItemService.eliminarItem( taskId ); // erase item by id
-
 //            // erase item from list
 //            for ( int i = 0 ; i < itemList.getItems().size() ; i ++ ) if ( itemList.getItems().get( i ).getIdItem() == taskId ) itemList.getItems().remove( i );
 //
 //            itemListService.modificarLlista( itemList ); // save modified list
-
             return ResponseEntity.noContent().build();
         }
     }
