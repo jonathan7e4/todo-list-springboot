@@ -1,6 +1,6 @@
 # Minima List
 
-![task1](img/minimalistLogo.png)
+![task1](resources/minimalistLogo.png)
 
 ## Resumen
 
@@ -23,12 +23,12 @@ Como usuario web no registrado:
 
 ## Sprints
 
-### Sprint 1
+## Sprint 1
 
 1. Para empezar pusimos a punto un repositorio de Git compartido.
-![task6](img/gitlab.png)
+![task6](resources/gitlab.png)
 2. Hemos acordado en un almacenamiento de datos común para todo el equipo, como se ve a continuación.
-![task1](img/proofhubFiles.png)
+![task1](resources/proofhubFiles.png)
 3. Después, nos hemos informado sobre otras aplicaciones en internet para inspirarnos.
 4. Entonces, una vez pensado el nombre de nuestra empresa, diseñamos la primera versión del logo para el producto y su nombre.
 5. Hemos escrito el *readme* y la *[style guide](https://itecbcn.proofhub.com/go?rpEkAwb)*.
@@ -37,21 +37,21 @@ Como usuario web no registrado:
 8. Finalmente, hemos publicado la [página web](https://josezaq.gitlab.io/m13-proyecto-to-do-list/).
 
 
-### Sprint 2
+## Sprint 2
 
 1. Primero creamos un proyecto nuevo de GitLab para instalar Spring Boot.
 2. Entonces instalamos Spring Boot en nuestro proyecto con las dependencias: Lombok, Spring Web, Thymeleaf, Spring Data JPA y H2.
 3. Una vez preparado el proyecto, hemos configurado los controladores y modelos.
 4. Nos hemos registrado en Postman y clonado el repositorio en GitHub.
 5. También nos hemos registrado en Heroku y sincronizado el repositorio de GitHub con uno nuevo creado previamente en Heroku, activando el control de versiones automático en la branca "main".
-![task1](img/syncDeployment.png)
+![task1](resources/syncDeployment.png)
 6. Programamos los controladores para crear, actualizar y borrar elementos de la lista.
 7. Y finalmente, utilizando el objeto *ResponseEntity*, programamos que los métodos devuelvan *HttpStatus* para comunicar al cliente si ha habido algun error en la petición:
     - Error *404 not found* si el objeto de la petición no existe.
     - Error *204 no content* si el objeto de la petición no tiene contenido.
     - Estado *200 OK* si el objeto de la petición devuelve el JSON correctamente.
 
-### Sprint 2 - End points
+### End points
 
 - GET "/todoitems" muestra todos los elementos actuales.
 - GET "/todoitems/{id}" muestra el elemento el cual su ID es el indicado en el *endpoint*.
@@ -78,14 +78,7 @@ Como usuario web no registrado:
 
 - DELETE "/todoitems/{id}" elimina el elemento el cual su ID es el indicado en el *endpoint*.
 
-###  Sprint 3
-
-- Crear Lista:
-![como crear un item relacionado con una lista](img/agregarUnItemRelationship.png)
-
-## Modelo de Datos
-
-Si no se muestra el modelo de datos, (en IntelliJ IDE) ir a settings > language > markdown y activar mermaid.
+### Modelo de Datos
 
 ```mermaid
 classDiagram
@@ -99,6 +92,172 @@ class TodoItem{
 class ItemList{
     +int listId
     +String name
+    +ArrayList<TodoItem> items
 }
-ItemList "0..1" -- "1..*" TodoItem  
+ItemList "1..*" -- "*..1" TodoItem  
+```
+
+## Sprint 3
+
+En el tercer *sprint*, hemos preparado la web para que pueda gestionar más de una lista y las tareas de cada una de ellas.
+
+Para poder hacerlo, hemos adaptado el entorno HTML, programado los *end points* y preprogramado el javascript.
+
+### Entorno HTML
+
+Tenemos un único index.html en el cual insertamos las listas dentro de un "div" en "main".
+
+Ahora tenemos un "div" para listas y otro "div" para tareas, uno al lado del otro. El ejemplo a continuación, esta simplificado.
+
+```
+<main>
+
+<header>Lists</header>
+<div class="list-insert">
+    <input type="text" id="list" placeholder="Add a list..." maxlength="45">
+    <button id="addListBtn" onclick="addList()">
+        <img src="resources/icons/plus.png" alt="" class="plusImg">
+    </button>
+</div>
+
+<header>Tasks</header>
+<div class="task-insert">
+    <input type="text" id="task" placeholder="Add a task..." maxlength="45">
+    <button id="addBtn" onclick="addTask()">
+        <img src="resources/icons/plus.png" alt="" class="plusImg">
+    </button>
+</div>
+
+</main>
+```
+
+### Javascript
+
+En javascript tenemos tres archivos, "lists.js" encargado de gestionar la adición de listas, "tasks.js" gestiona la adición de tareas y "apiConnection.js" gestiona los métodos que realizan peticiones a la API.
+
+A continuación se muestra un método que realiza una petición GET a la API para devolver las tareas de una lista determinada. Devuelve una ``Promise<Response>`` que puede ser satisfactoria o no, la respuesta se gestiona diferente en cada caso.
+
+```
+const url = "https://todo-list-springboot.herokuapp.com";
+const getItems = "/todoitems";
+const getLists = "/todolists";
+
+function fetchListTasks( listId )
+{
+    return fetch( url + getLists + "/" + listId + getItems,
+        {
+            method : "GET",
+            headers : new Headers({ "Content-type" : "application/json" } )
+        } );
+}
+```
+
+### End points
+
+API URL: https://todo-list-springboot.herokuapp.com
+
+#### List endpoints
+
+- POST "/todolists" (requiere enviar una lista): crea una lista nueva.
+
+
+- GET "/todolists": muestra todas las listas.
+- GET "/todolists/{id}": muestra la lista cuyo id corresponde con el parámetro {id}.
+
+
+- PUT "/todolists" (requiere enviar una lista): actualiza una lista existente.
+
+
+- DELETE "/todolists/{id}": elimina la lista cuyo id corresponde con el parámetro {id}.
+
+
+#### Task endpoints
+
+- POST "/todolists/{id}/todoitems" (requiere enviar una tarea): crea una tarea nueva en la lista cuyo id corresponde con el parámetro {id}.
+
+
+- GET "/todoitems": muestra todas las tareas.
+- GET "/todoitems/{id}": muestra la tarea cuyo id corresponde con el parámetro {id}.
+- GET "/todolists/{id}/todoitems": muestra todas las tareas de una lista cuyo id corresponde con el parámetro {id}.
+
+
+- PUT "/todoitems" (requiere enviar una tarea): actualiza una tarea existente.
+
+
+- DELETE "/todoitems/{id}": elimina la tarea cuyo id corresponde con el parámetro {id}.
+
+## Sprint 4
+
+En este *sprint* hemos desarrollado una aplicación android que gestiona listas y tareas.
+
+La aplicación Minima List permite crear y actualizar listas como gestionar las tareas de cada una de ellas.
+
+![splashScreen](resources/splashScreen.PNG)
+
+![listFragment](resources/listFragment.PNG)
+
+![taskFragment](resources/taskFragment.PNG)
+
+## Sprint 5
+
+En el *sprint* 4, aprovechamos la API alojada en Heroku para gestionar las listas y las tareas de cada, pero desde una aplicación android.
+
+1. Hemos creado una clase "service.ApiInterface" que redirige los métodos de kotlin como peticiones HTML a nuestra API.
+```
+interface ApiInterface
+{
+    companion object
+    {
+        private var BASE_URL = "https://todo-list-springboot.herokuapp.com"
+
+        fun create() : ApiInterface
+        {
+            val client = OkHttpClient.Builder().build()
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl( BASE_URL )
+                .addConverterFactory( GsonConverterFactory.create() )
+                .client(client)
+                .build()
+
+            return retrofit.create( ApiInterface::class.java )
+        }
+    }
+}
+```
+2. En la misma clase, creamos un método kotlin por cada petición HTML que necesitamos.
+```
+// Adds a new item to a specific list
+
+@POST( "/todolists/{id}/todoitems" )
+fun addApiItem( @Path( "id" ) id : Int, @Body todoItem : TodoItem ) : Call<TodoItem>
+```
+3. En el *ViewModel* reprogramamos los métodos que gestionan las listas y sus tareas para que utilicen las peticiones de la clase "ApiInterface".
+```
+// (POST) Adds an item to a specific list
+
+fun addTask( todoItem : TodoItem, adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>? )
+{
+    val request = api.addApiItem( todoItem.list.listId, todoItem )
+
+    request.enqueue( object : Callback<TodoItem>
+    {
+        override fun onFailure( call : Call<TodoItem>, throwable : Throwable )
+        {
+            Log.e( "ERROR", throwable.message.toString() )
+        }
+
+        override fun onResponse( call : Call<TodoItem>, response : Response<TodoItem> )
+        {
+            if ( response.isSuccessful )
+            {
+                val task = response.body()
+
+                if ( task != null ) getListById( todoItem.list.listId )?.items?.add( task )
+
+                adapter?.notifyDataSetChanged()
+            }
+        }
+    })
+}
 ```
