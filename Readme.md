@@ -261,3 +261,30 @@ fun addTask( todoItem : TodoItem, adapter : RecyclerView.Adapter<RecyclerView.Vi
     })
 }
 ```
+
+## Sprint 6
+
+En el último *sprint* hemos recuperado el tiempo perdido, aprovechando para arreglar funcionalidades que quedaron sin terminar en las versiones anteriores y posibles errores que han aparecido por cambiar cosas.
+
+### Errores en la web
+
+Hemos solucionado los siguientes problemas encontrados en la funcionalidad de la web:
+
+1. Las listas se pueden crear y eliminar localmente pero no hacía petición HTML, ahora hace peticiones HTML para persistir los cambios de crear y eliminar listas.
+2. El nombre de las listas no se podía modificar, hemos añadido un icono interactivo en cada lista para permitir al usuario cambiar el nombre de una lista existente. Hace petición HTML para que el cambio persista.
+3. Hemos modificado el título de las tareas para que muestre la lista actual seleccionada, para que el usuario sepa fácilmente que lista está visualizando.
+4. Al crear una lista, los identificadores unicos de cada lista se mezclaban localmente. Entonces al crear una tarea de la lista seleccionada, se creaba la tarea en otra lista. Ahora los identificadores no se mezclan y se pueden crear tareas inmediatamente después de crear una lista sin necesidad de actualizar la página.
+5. El aspecto del icono para modificar listas a sido desplazado y redimensionado ya que era muy pequeño.
+
+### Cambios en la API
+
+Hemos hecho un par de cambios en la API que tenemos alojada en Github:
+
+1. Hemos repasado el código de la API para hacerlo más eficiente, eliminando código repetido.
+2. También hemos eliminado registros de la base de datos, que correspondian con tareas sin ninguna lista asignada.
+
+### Mejoras en la aplicación de android
+
+Por último, hemos añadido mejoras a la aplicación android:
+
+1. El diseño visual de la aplicación ahora es *responsive*, para ello hemos modificado las medidas fijas de los márgenes de cada elemento por medidas dinámicas que se adaptan a la pantalla.
