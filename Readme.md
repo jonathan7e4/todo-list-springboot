@@ -288,3 +288,5 @@ Hemos hecho un par de cambios en la API que tenemos alojada en Github:
 Por último, hemos añadido mejoras a la aplicación android:
 
 1. El diseño visual de la aplicación ahora es *responsive*, para ello hemos modificado las medidas fijas de los márgenes de cada elemento por medidas dinámicas que se adaptan a la pantalla.
+2. Ahora la página se puede recargar deslizando el dedo hacia abajo desde la parte superior de la pantalla.
+3. Hemos añadido animaciones para las transiciones entre el fragmento de listas y tareas. Ahora la pantalla se mueve hacia la izquierda haciendo *swipe left* cuando se accede al fragmento de tareas y *swipe right* cuando se vuelve al fragmento de listas.
